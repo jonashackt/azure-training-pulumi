@@ -1,0 +1,3 @@
+name: scmbreakoutpulumi
+runtime: nodejs
+description: azuredevcollege/trainingdays scm breakout app infrastructure with Pulumi
