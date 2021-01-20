@@ -6,7 +6,7 @@ I wanted to do a quick setup with Pulumi in order to see how fast I would be in 
 
 Until now I invested around 1h for this...
 
-
+[![asciicast](https://asciinema.org/a/385771.svg)](https://asciinema.org/a/385771)
 
 ## SCM Breakout App infrastructure with Pulumi
 
@@ -29,3 +29,8 @@ https://www.pulumi.com/docs/reference/pkg/azure/appservice/appservice/
 Functions
 
 https://github.com/pulumi/examples/blob/master/azure-ts-functions-raw/index.ts
+
+
+Have a look into the Azure Portal
+
+![azure-resource-group](screenshots/azure-resource-group.png)
