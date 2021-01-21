@@ -6,7 +6,7 @@ I wanted to do a quick setup with Pulumi in order to see how fast I would be in 
 
 Until now I invested around 1h for this...
 
-[![asciicast](https://asciinema.org/a/385771.svg)](https://asciinema.org/a/385771)
+[![asciicast](https://asciinema.org/a/385869.svg)](https://asciinema.org/a/385869)
 
 ## SCM Breakout App infrastructure with Pulumi
 
@@ -34,6 +34,10 @@ https://www.pulumi.com/docs/reference/pkg/azure/storage/queue/
 
 https://www.pulumi.com/docs/reference/pkg/azure/appservice/appservice/
 
+###### Slots
+
+https://www.pulumi.com/docs/reference/pkg/azure/appservice/slot/
+
 
 #### FunctionApp
 
@@ -46,6 +50,12 @@ The setup uses a `azure.appservice.FunctionApp` !
 https://www.pulumi.com/docs/reference/pkg/azure/appservice/functionapp/
 
 
+## Architecture of the app
+
+See https://github.com/azuredevcollege/trainingdays/blob/master/day2/challenges/challenge-bo-3.md (all kudos go there!)
+
+![architecture_day2](screenshots/architecture_day2.png)
+
 Have a look into the Azure Portal
 
 ![azure-resource-group](screenshots/azure-resource-group.png)
@@ -54,5 +64,4 @@ Have a look into the Azure Portal
 
 ## TODO
 
-* App Service Slots `staging` für scm-breakout-contactsapi
 * Application Insights?

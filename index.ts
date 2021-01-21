@@ -15,7 +15,7 @@ const scmbreakoutPlan = new azure.appservice.Plan("asp-scmbreakoutrg", {
 
 // ContactsAPI Service
 
-const scmBreakoutContactsApi = new azure.appservice.AppService("scm-breakout-contactsapi-pulumi", {
+const scmContactsApi = new azure.appservice.AppService("scmContactsApi", {
     location: resourceGroup.location,
     resourceGroupName: resourceGroup.name,
     appServicePlanId: scmbreakoutPlan.id,
@@ -50,7 +50,7 @@ const thumbnailsQueue = new azure.storage.Queue("thumbnails", {
     storageAccountName: resourcesStorageAccount.name
 });
 
-const scmBreakoutResourceApi = new azure.appservice.AppService("scm-breakout-resourcesapi-pulumi", {
+const scmResourceApi = new azure.appservice.AppService("scmResourceApi", {
     location: resourceGroup.location,
     resourceGroupName: resourceGroup.name,
     appServicePlanId: scmbreakoutPlan.id,
@@ -69,7 +69,27 @@ const scmBreakoutResourceApi = new azure.appservice.AppService("scm-breakout-res
     },
 });
 
-const breakoutFunctionApp = new azure.appservice.FunctionApp("exampleFunctionApp", {
+const scmResourceApiSlot = new azure.appservice.Slot("scmResourceApiStg", {
+    appServiceName: scmResourceApi.name,
+    location: resourceGroup.location,
+    resourceGroupName: resourceGroup.name,
+    appServicePlanId: scmbreakoutPlan.id,
+    siteConfig: {
+        dotnetFrameworkVersion: "v4.0",
+        scmType: "LocalGit",
+    },
+    appSettings: {
+        ImageStoreOptions__StorageAccountConnectionString: resourcesStorageAccount.primaryConnectionString,
+        ImageStoreOptions__ImageContainer: "rawimages",
+        "ImageStoreOptions-__ThumbnailContainer": "thumbnails",
+        StorageQueueOptions__StorageAccountConnectionString: resourcesStorageAccount.primaryConnectionString,
+        StorageQueueOptions__Queue: "thumbnails",
+        StorageQueueOptions__ImageContainer: "rawimages",
+        StorageQueueOptions__ThumbnailContainer: "thumbnails"
+    },
+});
+
+const scmFunctionApp = new azure.appservice.FunctionApp("scmFunctionApp", {
     location: resourceGroup.location,
     resourceGroupName: resourceGroup.name,
     appServicePlanId: scmbreakoutPlan.id,
