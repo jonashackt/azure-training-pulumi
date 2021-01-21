@@ -1,6 +1,7 @@
 # azure-training-pulumi
 [![Build Status](https://github.com/jonashackt/azure-training-pulumi/workflows/pulumi-preview-up/badge.svg)](https://github.com/jonashackt/azure-training-pulumi/actions)
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/jonashackt/azure-training-pulumi/blob/master/LICENSE)
+[![renovateenabled](https://img.shields.io/badge/renovate-enabled-yellow)](https://renovatebot.com)
 
 azuredevcollege/trainingdays scm breakout app infrastructure with Pulumi
 
