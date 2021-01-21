@@ -124,6 +124,7 @@ jobs:
 
   up:
     runs-on: ubuntu-latest
+    needs: preview
     steps:
       - uses: actions/checkout@v2
 
