@@ -140,6 +140,10 @@ jobs:
 
 ```
 
+Using this simply workflow, the first `preview` job needs to finish successfully before the `up` job starts:
+
+![github-actions-preview-triggers-up](screenshots/github-actions-preview-triggers-up.png)
+
 Don't forget to craft a nice GitHub Actions badge!
 
 ```
