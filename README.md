@@ -16,19 +16,30 @@ mkdir scmbreakoutpulumi  && cd scmbreakoutpulumi
 pulumi new azure-typescript
 ```
 
-Storage Account
+#### Storage Account
+
+https://www.pulumi.com/docs/reference/pkg/azure/storage/
 
 https://www.pulumi.com/docs/reference/pkg/azure/storage/account/
 
+###### Container
 
-App Service
+https://www.pulumi.com/docs/reference/pkg/azure/storage/container/
+
+#### App Service
 
 https://www.pulumi.com/docs/reference/pkg/azure/appservice/appservice/
 
 
-Functions
+#### FunctionApp
+
+We don't have a Function in the setup, we have
 
 https://github.com/pulumi/examples/blob/master/azure-ts-functions-raw/index.ts
+
+The setup uses a `azure.appservice.FunctionApp` !
+
+https://www.pulumi.com/docs/reference/pkg/azure/appservice/functionapp/
 
 
 Have a look into the Azure Portal
