@@ -1,7 +1,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as azure from "@pulumi/azure";
 
-// Create an Azure Resource Group
+// SCM Resource Group
 const resourceGroup = new azure.core.ResourceGroup("scm-breakout-rg-pulumi");
 
 const scmbreakoutPlan = new azure.appservice.Plan("asp-scmbreakoutrg", {
@@ -44,6 +44,10 @@ const rawimagesContainer = new azure.storage.Container("rawimages", {
 const thumbnailsContainer = new azure.storage.Container("thumbnails", {
     storageAccountName: resourcesStorageAccount.name,
     containerAccessType: "blob",
+});
+
+const thumbnailsQueue = new azure.storage.Queue("thumbnails", {
+    storageAccountName: resourcesStorageAccount.name
 });
 
 const scmBreakoutResourceApi = new azure.appservice.AppService("scm-breakout-resourcesapi-pulumi", {

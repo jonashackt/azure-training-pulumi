@@ -26,6 +26,10 @@ https://www.pulumi.com/docs/reference/pkg/azure/storage/account/
 
 https://www.pulumi.com/docs/reference/pkg/azure/storage/container/
 
+###### Queues
+
+https://www.pulumi.com/docs/reference/pkg/azure/storage/queue/
+
 #### App Service
 
 https://www.pulumi.com/docs/reference/pkg/azure/appservice/appservice/
@@ -45,3 +49,10 @@ https://www.pulumi.com/docs/reference/pkg/azure/appservice/functionapp/
 Have a look into the Azure Portal
 
 ![azure-resource-group](screenshots/azure-resource-group.png)
+
+
+
+## TODO
+
+* App Service Slots `staging` für scm-breakout-contactsapi
+* Application Insights?
