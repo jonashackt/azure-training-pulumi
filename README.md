@@ -120,7 +120,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: pulumi/actions@v1
+      - uses: pulumi/actions@v2
         with:
           command: preview
           stack-name: github-$GITHUB_RUN_ID
@@ -131,7 +131,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: pulumi/actions@v1
+      - uses: pulumi/actions@v2
         with:
           command: up
           stack-name: github-$GITHUB_RUN_ID
@@ -142,7 +142,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: pulumi/actions@v1
+      - uses: pulumi/actions@v2
         with:
           command: destroy
           stack-name: github-$GITHUB_RUN_ID
