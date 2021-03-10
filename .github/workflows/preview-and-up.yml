@@ -19,23 +19,22 @@ jobs:
         uses: pulumi/action-install-pulumi-cli@v1.0.1
 
       - name: Create GHA pipeline specific Pulumi Stack
-        run: pulumi stack init github-$GITHUB_RUN_ID
+        run: pulumi stack init github-${{ github.run_id }}
 
       - uses: pulumi/actions@v2
         with:
           command: preview
-          stack-name: github-${{ env.GITHUB_RUN_ID }}
-
+          stack-name: github-${{ github.run_id }}
 
       - uses: pulumi/actions@v2
         with:
           command: up
           stack-name: $STACK_NAME
         env:
-          STACK_NAME: github-${{ github.job }}
+          STACK_NAME: github-${{ github.run_id }}
 
       - uses: pulumi/actions@v2
         with:
           command: destroy
-          stack-name: github-${{ github.job }}
+          stack-name: github-${{ github.run_id }}
 
