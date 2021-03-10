@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '14'
 
+      - name: After setting up the Pulumi project specific language environment, we need to install the dependencies also (see https://github.com/pulumi/actions#example-workflows)
+        run: npm install
+
       - name: Install Pulumi CLI so that we can create a GHA pipeline specific Pulumi Stack
         uses: pulumi/action-install-pulumi-cli@v1.0.1
 
