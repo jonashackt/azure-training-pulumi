@@ -10,34 +10,28 @@ env:
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
 jobs:
-  preview:
+  preview-up-destroy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Install Pulumi CLI so that we can create a GHA pipeline specific Pulumi Stack
+        uses: pulumi/action-install-pulumi-cli@v1
+
+      - name: Create GHA pipeline specific Pulumi Stack
+        run: pulumi stack init dev github-$GITHUB_RUN_ID
 
       - uses: pulumi/actions@v2
         with:
           command: preview
-          stack-name: github-$GITHUB_RUN_ID
-
-  up:
-    runs-on: ubuntu-latest
-    needs: preview
-    steps:
-      - uses: actions/checkout@v2
+          stack-name: github-${{ GITHUB_RUN_ID }}
 
       - uses: pulumi/actions@v2
         with:
           command: up
-          stack-name: github-$GITHUB_RUN_ID
-
-  destroy:
-    runs-on: ubuntu-latest
-    needs: up
-    steps:
-      - uses: actions/checkout@v2
+          stack-name: github-${{ GITHUB_RUN_ID }}
 
       - uses: pulumi/actions@v2
         with:
           command: destroy
-          stack-name: github-$GITHUB_RUN_ID
+          stack-name: github-${{ GITHUB_RUN_ID }}
