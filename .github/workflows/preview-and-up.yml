@@ -46,3 +46,6 @@ jobs:
           command: destroy
           stack-name: github-${{ github.run_id }}
 
+      - name: Remove the GHA pipeline specific Pulumi Stack
+        run: |
+          pulumi stack rm github-${{ github.run_id }}
