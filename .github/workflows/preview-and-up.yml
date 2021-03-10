@@ -24,9 +24,8 @@ jobs:
       - uses: pulumi/actions@v2
         with:
           command: preview
-          stack-name: "$STACK_NAME"
-        env:
-          STACK_NAME: github-${{ env.GITHUB_RUN_ID }}
+          stack-name: github-${{ env.GITHUB_RUN_ID }}
+
 
       - uses: pulumi/actions@v2
         with:
