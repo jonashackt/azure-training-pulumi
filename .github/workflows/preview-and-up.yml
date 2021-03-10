@@ -26,18 +26,17 @@ jobs:
           command: preview
           stack-name: env.STACK_NAME
         env:
-          STACK_NAME: github-${{ GITHUB_RUN_ID }}
+          STACK_NAME: github-${{ env.GITHUB_RUN_ID }}
 
       - uses: pulumi/actions@v2
         with:
           command: up
-          stack-name: env.STACK_NAME
+          stack-name: $STACK_NAME
         env:
-          STACK_NAME: github-${{ GITHUB_RUN_ID }}
+          STACK_NAME: github-${{ github.job }}
 
       - uses: pulumi/actions@v2
         with:
           command: destroy
-          stack-name: env.STACK_NAME
-        env:
-          STACK_NAME: github-${{ GITHUB_RUN_ID }}
+          stack-name: github-${{ github.job }}
+
