@@ -39,9 +39,7 @@ jobs:
       - uses: pulumi/actions@v2
         with:
           command: up
-          stack-name: $STACK_NAME
-        env:
-          STACK_NAME: github-${{ github.run_id }}
+          stack-name: github-${{ github.run_id }}
 
       - uses: pulumi/actions@v2
         with:
