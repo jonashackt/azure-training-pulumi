@@ -48,4 +48,4 @@ jobs:
 
       - name: Remove the GHA pipeline specific Pulumi Stack
         run: |
-          pulumi stack rm github-${{ github.run_id }}
+          pulumi stack rm github-${{ github.run_id }} -y
