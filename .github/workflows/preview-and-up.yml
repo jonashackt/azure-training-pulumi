@@ -26,8 +26,10 @@ jobs:
       - name: Install Pulumi CLI so that we can create a GHA pipeline specific Pulumi Stack
         uses: pulumi/action-install-pulumi-cli@v1.0.1
 
-      - name: Create GHA pipeline specific Pulumi Stack
-        run: pulumi stack init github-${{ github.run_id }}
+      - name: Create GHA pipeline specific Pulumi Stack incl. Azure location
+        run: |
+          pulumi stack init github-${{ github.run_id }}
+          pulumi config set azure:location WestEurope
 
       - uses: pulumi/actions@v2
         with:
