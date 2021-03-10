@@ -19,7 +19,7 @@ jobs:
         uses: pulumi/action-install-pulumi-cli@v1.0.1
 
       - name: Create GHA pipeline specific Pulumi Stack
-        run: pulumi stack init dev github-$GITHUB_RUN_ID
+        run: pulumi stack init github-$GITHUB_RUN_ID
 
       - uses: pulumi/actions@v2
         with:
