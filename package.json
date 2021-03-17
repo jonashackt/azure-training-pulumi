@@ -4,7 +4,7 @@
         "@types/node": "10.17.55"
     },
     "dependencies": {
-        "@pulumi/pulumi": "2.22.0",
+        "@pulumi/pulumi": "2.23.0",
         "@pulumi/azure": "3.51.0"
     }
 }
