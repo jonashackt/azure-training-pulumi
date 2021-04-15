@@ -24,7 +24,7 @@ jobs:
         run: npm install
 
       - name: Install Pulumi CLI so that we can create a GHA pipeline specific Pulumi Stack
-        uses: pulumi/action-install-pulumi-cli@v1.0.1
+        uses: pulumi/action-install-pulumi-cli@v1.0.2
 
       - name: Create GHA pipeline specific Pulumi Stack incl. Azure location
         run: |
