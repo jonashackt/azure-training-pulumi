@@ -31,17 +31,17 @@ jobs:
           pulumi stack init github-${{ github.run_id }}
           pulumi config set azure:location WestEurope
 
-      - uses: pulumi/actions@v2
+      - uses: pulumi/actions@v3
         with:
           command: preview
           stack-name: github-${{ github.run_id }}
 
-      - uses: pulumi/actions@v2
+      - uses: pulumi/actions@v3
         with:
           command: up
           stack-name: github-${{ github.run_id }}
 
-      - uses: pulumi/actions@v2
+      - uses: pulumi/actions@v3
         with:
           command: destroy
           stack-name: github-${{ github.run_id }}
