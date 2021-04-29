@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: In order to use the Pulumi v2 action, we need to setup the Pulumi project specific language environment
+      - name: In order to use the Pulumi v2+ action, we need to setup the Pulumi project specific language environment
         uses: actions/setup-node@v2
         with:
           node-version: '14'
@@ -31,17 +31,20 @@ jobs:
           pulumi stack init github-${{ github.run_id }}
           pulumi config set azure:location WestEurope
 
-      - uses: pulumi/actions@v2
+      - name: Preview pulumi up
+        uses: pulumi/actions@v3
         with:
           command: preview
           stack-name: github-${{ github.run_id }}
 
-      - uses: pulumi/actions@v2
+      - name: Actually run pulumi up
+        uses: pulumi/actions@v3
         with:
           command: up
           stack-name: github-${{ github.run_id }}
 
-      - uses: pulumi/actions@v2
+      - name: Destroy resources via pulumi destroy
+        uses: pulumi/actions@v3
         with:
           command: destroy
           stack-name: github-${{ github.run_id }}
