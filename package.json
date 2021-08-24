@@ -5,6 +5,6 @@
     },
     "dependencies": {
         "@pulumi/pulumi": "3.10.3",
-        "@pulumi/azure": "4.14.0"
+        "@pulumi/azure": "4.15.0"
     }
 }
