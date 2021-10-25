@@ -1,7 +1,7 @@
 {
     "name": "scmbreakoutpulumi",
     "devDependencies": {
-        "@types/node": "14.17.29"
+        "@types/node": "14.17.30"
     },
     "dependencies": {
         "@pulumi/pulumi": "3.16.0",
