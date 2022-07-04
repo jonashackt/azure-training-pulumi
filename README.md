@@ -77,9 +77,9 @@ First we need to create 5 new GitHub Repository Secrets (encrypted variables) in
 
 We should start to create a new Pulumi Access Token `PULUMI_ACCESS_TOKEN` at https://app.pulumi.com/jonashackt/settings/tokens
 
-Now we need to create the Azure specific variables (see the docs https://github.com/pulumi/actions#microsoft-azure):
+Now we need to create the Azure specific variables (see the docs https://github.com/pulumi/actions#microsoft-azure).
 
-`ARM_SUBSCRIPTION_ID`
+For the `ARM_SUBSCRIPTION_ID` run a `az account show` (after you logged your CLI into your Azure subscription via `azure login`) and use the value of `"id":`.
 
 For the other 3 variables we need to create a new Azure Service Principal (https://www.pulumi.com/docs/intro/cloud-providers/azure/setup/#creating-a-service-principal), which [is the recommended way](https://www.pulumi.com/docs/intro/cloud-providers/azure/setup/#service-principal-authentication):
 
@@ -115,38 +115,48 @@ env:
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
 jobs:
-  preview:
+  preview-up-destroy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - uses: pulumi/actions@v2
+      - name: In order to use the Pulumi v2+ action, we need to setup the Pulumi project specific language environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: After setting up the Pulumi project specific language environment, we need to install the dependencies also (see https://github.com/pulumi/actions#example-workflows)
+        run: npm install
+
+      - name: Install Pulumi CLI so that we can create a GHA pipeline specific Pulumi Stack
+        uses: pulumi/action-install-pulumi-cli@v1.0.2
+
+      - name: Create GHA pipeline specific Pulumi Stack incl. Azure location
+        run: |
+          pulumi stack init github-${{ github.run_id }}
+          pulumi config set azure:location WestEurope
+
+      - name: Preview pulumi up
+        uses: pulumi/actions@v3
         with:
           command: preview
-          stack-name: github-$GITHUB_RUN_ID
+          stack-name: github-${{ github.run_id }}
 
-  up:
-    runs-on: ubuntu-latest
-    needs: preview
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: pulumi/actions@v2
+      - name: Actually run pulumi up
+        uses: pulumi/actions@v3
         with:
           command: up
-          stack-name: github-$GITHUB_RUN_ID
+          stack-name: github-${{ github.run_id }}
 
-  destroy:
-    runs-on: ubuntu-latest
-    needs: up
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: pulumi/actions@v2
+      - name: Destroy resources via pulumi destroy
+        uses: pulumi/actions@v3
         with:
           command: destroy
-          stack-name: github-$GITHUB_RUN_ID
+          stack-name: github-${{ github.run_id }}
 
+      - name: Remove the GHA pipeline specific Pulumi Stack
+        run: |
+          pulumi stack rm github-${{ github.run_id }} -y
 ```
 
 We use the possibility [to define the environment variables on the workflow's top level](https://docs.github.com/en/actions/reference/environment-variables) to reduce the 3 definition to one. Also we define a `stack-name` containing the `GITHUB_RUN_ID` which is one of [the default GHA environment variables](https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables) which is defined as:
@@ -163,6 +173,7 @@ To learn more about possible reasons and resolution, visit https://www.pulumi.co
 
 ```
 
+See this https://stackoverflow.com/questions/66563656/pulumi-with-github-actions-crashing-parallel-workflows-with-error-409-conflic/66563657#66563657
 
 Using this simply workflow, the first `preview` job needs to finish successfully before the `up` job starts:
 
