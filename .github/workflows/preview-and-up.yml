@@ -32,19 +32,19 @@ jobs:
           pulumi config set azure:location WestEurope
 
       - name: Preview pulumi up
-        uses: pulumi/actions@v3
+        uses: pulumi/actions@v4
         with:
           command: preview
           stack-name: github-${{ github.run_id }}
 
       - name: Actually run pulumi up
-        uses: pulumi/actions@v3
+        uses: pulumi/actions@v4
         with:
           command: up
           stack-name: github-${{ github.run_id }}
 
       - name: Destroy resources via pulumi destroy
-        uses: pulumi/actions@v3
+        uses: pulumi/actions@v4
         with:
           command: destroy
           stack-name: github-${{ github.run_id }}
