@@ -13,7 +13,7 @@ jobs:
   preview-up-destroy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: In order to use the Pulumi v2+ action, we need to setup the Pulumi project specific language environment
         uses: actions/setup-node@v2
